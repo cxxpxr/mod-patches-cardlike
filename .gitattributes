@@ -1,0 +1,2 @@
+# Patches must keep LF line endings: the files they build must be the same bytes for every player.
+*.clpatch text eol=lf
