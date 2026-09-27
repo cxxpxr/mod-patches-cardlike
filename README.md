@@ -9,6 +9,7 @@ A patch (`.clpatch`) holds only the files written for the Cardlike version of a 
 | Patch | Makes | Needs this original archive | Get it from |
 |---|---|---|---|
 | [`patches/pokermon.clpatch`](patches/pokermon.clpatch) | Pokermon for Cardlike | Pokermon 3.9.1 (`Pokermon-3.9.1.zip`) | [Pokermon 3.9.1 source archive](https://github.com/InertSteak/Pokermon/archive/refs/tags/3.9.1.zip) ([repository](https://github.com/InertSteak/Pokermon)) |
+| [`patches/all_in_jest.clpatch`](patches/all_in_jest.clpatch) | All in Jest for Cardlike | All in Jest 0.7.2aa (`All-In-Jest-0.7.2aa.zip`) | [All in Jest 0.7.2aa source archive](https://github.com/survovoaneend/All-In-Jest/archive/refs/tags/0.7.2aa.zip) ([repository](https://github.com/survovoaneend/All-In-Jest)) |
 
 ## Install
 
@@ -33,6 +34,7 @@ The Cardlike modding documentation (Mods window, "Mod patches") describes the fo
 
 - These patches are unofficial fan work. They are not made, reviewed, endorsed or supported by the authors of the original mods, by the developers or publishers of the games those mods were made for, or by the Cardlike team.
 - Pokermon is a mod for Balatro. This project is not affiliated with LocalThunk or Playstack, or with Nintendo, Game Freak, Creatures Inc. or The Pokémon Company. All names and trademarks belong to their owners.
+- All in Jest is a mod for Balatro. This project is not affiliated with the All in Jest team, LocalThunk or Playstack.
 - The patches contain no art, sounds or other files of the original mods. You get those from the original authors.
 - A Cardlike port works like the original where Cardlike allows it. Some cards work differently or are missing because Cardlike has no matching feature. Problems with a port belong in this repository's issues, not with the original mod's authors.
 - The patches are provided as is, without any warranty. See the license.
@@ -40,9 +42,10 @@ The Cardlike modding documentation (Mods window, "Mod patches") describes the fo
 ## Credits
 
 - **Pokermon** by InertSteak and the Pokermon contributors: <https://github.com/InertSteak/Pokermon>. The Cardlike version keeps the original's credits. Please support the original mod.
+- **All in Jest** by Nevernamed (art), survivalaiden, RattlingSnow353, Jumbocarrot, ejwu2, HEAVENBRAND, Jamie!, Vitellary and the All in Jest contributors: <https://github.com/survovoaneend/All-In-Jest>. The Cardlike version keeps the original's credits. Please support the original mod.
 
 ## License
 
 This repository is licensed under the [GNU General Public License v3.0](LICENSE).
 
-The patches contain code and text adapted from the original mods. Pokermon is licensed under the GNU General Public License v3.0, and the Pokermon patch is shared under the same license. The original mods' art and sounds are not part of this repository and keep their own licenses.
+The patches contain code and text adapted from the original mods. Pokermon is licensed under the GNU General Public License v3.0, and the Pokermon patch is shared under the same license. All in Jest has no license: the All in Jest patch contains its card names and texts, and those stay with the All in Jest authors. They are not covered by this repository's license. The original mods' art and sounds are not part of this repository and keep their own licenses.
