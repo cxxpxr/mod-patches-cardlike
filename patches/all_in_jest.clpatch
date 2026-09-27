@@ -6761,7 +6761,7 @@ end
 local function paidAbility(id, press)
   return AIJ.ability(id, {
     label = function(card) return 'USE $' .. AIJ.fmt(AIJ.val(card, id, 'cost', 1)) end,
-    canPress = function(card, state) return (state.money or 0) >= AIJ.num(card, 'cost') end,
+    canPress = function(card, state, opts) return (opts and opts.free) or (state.money or 0) >= AIJ.num(card, 'cost') end,
     press = function(card, state, opts)
       if not (opts and opts.free) then
         local cost = AIJ.num(card, 'cost')
@@ -14805,7 +14805,7 @@ AIJ.addJoker {
   buttons = {
     AIJ.ability('joker_png', {
       label = 'REROLL',
-      canPress = function(card, state) return (state.money or 0) >= AIJ.num(card, 'cost') end,
+      canPress = function(card, state, opts) return (opts and opts.free) or (state.money or 0) >= AIJ.num(card, 'cost') end,
       press = function(card, state, opts)
         local free = opts and opts.free
         if not free then
@@ -15149,9 +15149,9 @@ AIJ.addJoker {
   buttons = {
     AIJ.ability('lawfirm', {
       label = 'SUE',
-      canPress = function(card, state)
+      canPress = function(card, state, opts)
         return state.blind ~= nil and state.blind.boss == true and not state.bossDisabled
-          and (state.money or 0) >= AIJ.num(card, 'cost') and (state:isPhase('play') or state:isPhase('blindSelect'))
+          and ((opts and opts.free) or (state.money or 0) >= AIJ.num(card, 'cost')) and (state:isPhase('play') or state:isPhase('blindSelect'))
       end,
       press = function(card, state, opts)
         if not (state.blind and state.blind.boss) or state.bossDisabled then return false end
@@ -16994,9 +16994,9 @@ AIJ.addJoker {
         local cost = state and AIJ.safe(repairJob, card, state)
         return cost and ('REPAIR $' .. AIJ.fmt(cost)) or 'REPAIR'
       end,
-      canPress = function(card, state)
+      canPress = function(card, state, opts)
         local cost = state and AIJ.safe(repairJob, card, state)
-        return cost ~= nil and state.money >= cost and not state:isPhase('scoring')
+        return cost ~= nil and ((opts and opts.free) or state.money >= cost) and not state:isPhase('scoring')
       end,
       press = function(card, state, opts)
         local cost, right, sticker = repairJob(card, state)
@@ -17855,8 +17855,8 @@ AIJ.addJoker {
   buttons = {
     AIJ.ability('pencil_drawing', {
       label = function(card) return 'DRAW $' .. AIJ.fmt(AIJ.num(card, 'cost')) end,
-      canPress = function(card, state)
-        return state and state.phase == 'play' and (state.money or 0) >= AIJ.num(card, 'cost')
+      canPress = function(card, state, opts)
+        return state and state.phase == 'play' and ((opts and opts.free) or (state.money or 0) >= AIJ.num(card, 'cost'))
       end,
       press = function(card, state, opts)
         if not (opts and opts.free) then state:mutateMoney(-AIJ.num(card, 'cost')) end
@@ -23531,7 +23531,7 @@ AIJ.addJoker {
 }
 
 
-== file lib/aij.lua (802 lines)
+== file lib/aij.lua (803 lines)
 local AIJ = {}
 AIJ.MOD = 'all_in_jest'
 AIJ.T = cardlike.require('lib.text')
@@ -24299,8 +24299,9 @@ end
 function AIJ.useAbility(card, state)
   local spec = AIJ.abilities[AIJ.defId(card) or '']
   if not spec then return false end
-  if spec.canPress and spec.canPress(card, state) == false then return false end
-  return spec.press(card, state, { free = true, repeated = true }) ~= false
+  local opts = { free = true, repeated = true }
+  if spec.canPress and spec.canPress(card, state, opts) == false then return false end
+  return spec.press(card, state, opts) ~= false
 end
 
 AIJ.lists = {
